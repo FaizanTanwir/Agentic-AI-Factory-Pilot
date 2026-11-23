@@ -1,0 +1,77 @@
+$schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  chat_history:
+    type: list
+    is_chat_history: true
+    default: []
+  question:
+    type: string
+    is_chat_input: true
+    default: "[(2+2)*3]/4"
+  ground_truth:
+    type: string
+    default: ""
+outputs:
+  answer:
+    type: string
+    reference: ${format_output.output}
+    is_chat_output: true
+  f1_score:
+    type: double
+    reference: ${f1_eval.output}
+nodes:
+- name: f1_eval
+  type: python
+  source:
+    type: code
+    path: f1_eval.py
+  inputs:
+    response: ${chat.output}
+    ground_truth: ${inputs.ground_truth}
+- name: chat
+  use_variants: true
+- name: format_output
+  type: python
+  source:
+    type: code
+    path: format_output.py
+  inputs:
+    llm_output: ${chat.output}
+node_variants:
+  chat:
+    default_variant_id: variant_0
+    variants:
+      variant_0:
+        node:
+          type: llm
+          source:
+            type: code
+            path: chat.jinja2
+          inputs:
+            deployment_name: gpt-4.1-nano
+            max_tokens: 256
+            temperature: 0.1
+            chat_history: ${inputs.chat_history}
+            question: ${inputs.question}
+            response_format:
+              type: text
+          connection: to_replace_with_connection_name
+          api: chat
+      variant_1:
+        node:
+          type: llm
+          source:
+            type: code
+            path: chat_variant_1.jinja2
+          inputs:
+            deployment_name: gpt-4.1-nano
+            max_tokens: 256
+            temperature: 0.1
+            chat_history: ${inputs.chat_history}
+            question: ${inputs.question}
+            response_format:
+              type: text
+          connection: to_replace_with_connection_name
+          api: chat

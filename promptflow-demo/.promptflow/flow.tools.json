@@ -1,0 +1,67 @@
+{
+  "package": {},
+  "code": {
+    "chat.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "question": {
+          "type": [
+            "string"
+          ]
+        },
+        "chat_history": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "chat.jinja2"
+    },
+    "format_output.py": {
+      "type": "python",
+      "inputs": {
+        "llm_output": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "description": "Clean up the LLM's answer before it is returned to the user.",
+      "source": "format_output.py",
+      "function": "format_output"
+    },
+    "chat_variant_1.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "question": {
+          "type": [
+            "string"
+          ]
+        },
+        "chat_history": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "chat_variant_1.jinja2"
+    },
+    "f1_eval.py": {
+      "type": "python",
+      "inputs": {
+        "response": {
+          "type": [
+            "string"
+          ]
+        },
+        "ground_truth": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "f1_eval.py",
+      "function": "f1_eval"
+    }
+  }
+}

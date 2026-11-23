@@ -1,0 +1,7 @@
+{"question": "What is 48 × 25?", "ground_truth": "1200"}
+{"question": "Solve for x: 3x + 7 = 22", "ground_truth": "5"}
+{"question": "What is 3/4 + 2/3?", "ground_truth": "17/12"}
+{"question": "What is the square root of 144 plus 2 to the power of 5?", "ground_truth": "44"}
+{"question": "A train travels at 60 km/h for 2.5 hours. How far does it travel?", "ground_truth": "150 km"}
+{"question": "A shirt costs $80 and is on sale for 25% off. What is the sale price?", "ground_truth": "$60"}
+{"question": "Sara has 3 boxes with 12 pencils in each box. She gives away 9 pencils. How many pencils does she have left?", "ground_truth": "27"}
